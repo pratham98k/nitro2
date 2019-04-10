@@ -12,10 +12,10 @@ nodejs('nodejs1') {
 }
     
 }
- stage('docker build push') {
+ stage('docker build & push to  Azure container registry') {
     // This step should not normally be used in your script. Consult the inline help for details.
     docker.withRegistry('https://sapient.azurecr.io', 'acr_credentials') {
-        def app = docker.build("pratham98k/nitro2:${commit_id}", '.').push()
+        def app = docker.build("pratham98k/nitro2:${BUILD_NUMBER}", '.').push()
     }
 
 }   
