@@ -3,7 +3,7 @@ node('master') {
     // some block
 stage('prepration') {
     // some block
-checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/pratham98k/docker-demo.git']]])
+checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/pratham98k/nitro2.git']]])
 }
 stage('Node Build & Test') {
 nodejs('nodejs1') {
