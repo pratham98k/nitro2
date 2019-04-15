@@ -1,0 +1,22 @@
+node('master') {
+    def commit_id
+    // some block
+stage('prepration') {
+    // some block
+checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/pratham98k/nitro2.git']]])
+}
+stage('test') {
+nodejs('node') {
+   sh 'npm install --only=dev'
+   sh 'npm test'
+}
+    
+}
+ stage('docker build push') {
+    // This step should not normally be used in your script. Consult the inline help for details.
+    docker.withRegistry('https://sapient.azurecr.io', 'dockerhub') {
+        def app = docker.build("pratham98k/nitro2:${commit_id}", '.').push()
+    }
+
+}   
+}
